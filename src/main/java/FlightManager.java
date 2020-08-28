@@ -10,8 +10,8 @@ public class FlightManager {
         return flight;
     }
 
-    public float calculateMaxIndividualBagWeight() {
-        float maxBagWeight = flight.getAssignedPlane().getType().getWeight() / 2;
+    public double calculateMaxIndividualBagWeight() {
+        double maxBagWeight = flight.getAssignedPlane().getType().getWeight() / 2;
         return maxBagWeight / flight.getAssignedPlane().getType().getSeats();
     }
 
@@ -21,5 +21,10 @@ public class FlightManager {
             total += i.getBagWeight();
         }
         return total;
+    }
+
+    public double calculateBagWeightAvailable() {
+        double maxBagWeight = flight.getAssignedPlane().getType().getWeight() / 2;
+        return  maxBagWeight - calculateBagWeightBooked();
     }
 }

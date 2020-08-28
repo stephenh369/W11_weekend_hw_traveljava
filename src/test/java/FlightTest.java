@@ -105,4 +105,11 @@ public class FlightTest {
         flight1.bookPassenger(passenger2);
         assertEquals(15.00, flightManager1.calculateBagWeightBooked(), 0.01);
     }
+
+    @Test
+    public void canCalculateBagWeightAvailable() {
+        flight1.bookPassenger(passenger1);
+        flight1.bookPassenger(passenger2);
+        assertEquals(9985.00, flightManager1.calculateBagWeightAvailable(), 0.01);
+    }
 }
