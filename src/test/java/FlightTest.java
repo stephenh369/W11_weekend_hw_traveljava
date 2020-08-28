@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.theories.suppliers.TestedOn;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ public class FlightTest {
     Plane emptyPlane;
     Flight flight1;
     Flight emptyFlight;
+    FlightManager flightManager1;
 
     @Before
     public void before() {
@@ -41,8 +43,11 @@ public class FlightTest {
                 "N/A",
                 "N/A"
         );
+
+        flightManager1 = new FlightManager(flight1);
     }
 
+//    FLIGHT CLASS
 
     @Test
     public void canGetAssignedPlane() {
@@ -85,5 +90,12 @@ public class FlightTest {
     public void canGetSeatsAvailable() {
         flight1.bookPassenger(passenger1);
         assertEquals(399, flight1.seatsAvailable());
+    }
+
+//    FLIGHT MANAGER CLASS
+
+    @Test
+    public void canCalculateMaxIndividualBagWeight() {
+        assertEquals(25.0, flightManager1.calculateMaxIndividualBagWeight(), 0.01);
     }
 }

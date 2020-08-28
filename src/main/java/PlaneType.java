@@ -1,18 +1,18 @@
 public enum PlaneType {
-    BOEING747(450, 400),
-    AIRBUSA350(300, 350),
+    BOEING747(20000, 400),
+    AIRBUSA350(10000, 250),
     EMPTYPLANE(0, 0);
 
-    private final int weight;
+    private final int storageWeight;
     private final int seats;
 
-    PlaneType(int weight, int seats) {
-        this.weight = weight;
+    PlaneType(int storageWeight, int seats) {
+        this.storageWeight = storageWeight;
         this.seats = seats;
     }
 
     public int getWeight() {
-        return weight;
+        return storageWeight;
     }
 
     public int getSeats() {
