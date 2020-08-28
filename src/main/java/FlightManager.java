@@ -24,7 +24,7 @@ public class FlightManager {
     }
 
     public double calculateBagWeightAvailable() {
-        double maxBagWeight = flight.getAssignedPlane().getType().getWeight() / 2;
+        double maxBagWeight = flight.getAssignedPlane().getType().getWeight() / 2.00;
         return  maxBagWeight - calculateBagWeightBooked();
     }
 }
