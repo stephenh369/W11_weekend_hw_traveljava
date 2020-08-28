@@ -46,4 +46,10 @@ public class Flight {
     public String getDepartureTime() {
         return departureTime;
     }
+
+    public void bookPassenger(Passenger passenger) {
+        if (assignedPlane.getType().getSeats() > this.passengers.size()) {
+            this.passengers.add(passenger);
+        }
+    }
 }

@@ -11,7 +11,9 @@ public class FlightTest {
     Passenger passenger2;
     ArrayList<Passenger> passengerGroup;
     Plane plane;
+    Plane emptyPlane;
     Flight flight1;
+    Flight emptyFlight;
 
     @Before
     public void before() {
@@ -22,6 +24,7 @@ public class FlightTest {
         passengerGroup.add(passenger2);
 
         plane = new Plane(PlaneType.BOEING747);
+        emptyPlane = new Plane(PlaneType.EMPTYPLANE);
 
         flight1 = new Flight(
                 plane,
@@ -30,6 +33,20 @@ public class FlightTest {
                 "EDI",
                 "0700"
         );
+
+        emptyFlight = new Flight(
+                emptyPlane,
+                "00000",
+                "N/A",
+                "N/A",
+                "N/A"
+        );
+    }
+
+
+    @Test
+    public void canGetAssignedPlane() {
+        assertEquals(plane, flight1.getAssignedPlane());
     }
 
     @Test
@@ -50,5 +67,17 @@ public class FlightTest {
     @Test
     public void canGetDepartureTime() {
         assertEquals("0700", flight1.getDepartureTime());
+    }
+
+    @Test
+    public void canBookPassenger() {
+        flight1.bookPassenger(passenger1);
+        assertEquals(1, flight1.getPassengers().size());
+    }
+
+    @Test
+    public void cannotBookPassengerIfNoSeats() {
+        emptyFlight.bookPassenger(passenger1);
+        assertEquals(0, flight1.getPassengers().size());
     }
 }
