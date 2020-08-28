@@ -10,8 +10,8 @@ public class PassengerTest {
 
     @Before
     public void before() {
-        passenger1 = new Passenger("Joe Bloggs", 1);
-        passenger2 = new Passenger("Boe Jloggs", 2);
+        passenger1 = new Passenger("Joe Bloggs", 5);
+        passenger2 = new Passenger("Boe Jloggs", 10);
     }
 
     @Test
@@ -21,6 +21,6 @@ public class PassengerTest {
 
     @Test
     public void canGetBags() {
-        assertEquals(2, passenger2.getBags());
+        assertEquals(10, passenger2.getBagWeight());
     }
 }
