@@ -80,4 +80,10 @@ public class FlightTest {
         emptyFlight.bookPassenger(passenger1);
         assertEquals(0, flight1.getPassengers().size());
     }
+
+    @Test
+    public void canGetSeatsAvailable() {
+        flight1.bookPassenger(passenger1);
+        assertEquals(399, flight1.seatsAvailable());
+    }
 }
