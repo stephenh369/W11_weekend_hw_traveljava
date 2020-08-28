@@ -96,6 +96,13 @@ public class FlightTest {
 
     @Test
     public void canCalculateMaxIndividualBagWeight() {
-        assertEquals(25.0, flightManager1.calculateMaxIndividualBagWeight(), 0.01);
+        assertEquals(25.00, flightManager1.calculateMaxIndividualBagWeight(), 0.01);
+    }
+
+    @Test
+    public void canCalculateBagWeightBooked() {
+        flight1.bookPassenger(passenger1);
+        flight1.bookPassenger(passenger2);
+        assertEquals(15.00, flightManager1.calculateBagWeightBooked(), 0.01);
     }
 }
