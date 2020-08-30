@@ -2,6 +2,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Random;
 
 public class Flight {
 
@@ -63,7 +64,7 @@ public class Flight {
         return formatted;
     }
 
-    public void bookPassenger(Passenger passenger) {
+    public void addPassenger(Passenger passenger) {
         if (assignedPlane.getType().getSeats() > this.passengers.size()) {
             this.passengers.add(passenger);
         }
@@ -71,5 +72,10 @@ public class Flight {
 
     public int seatsAvailable() {
         return assignedPlane.getType().getSeats() - this.passengers.size();
+    }
+
+    public int randomAvailableSeat() {
+        Random random = new Random();
+        return random.ints(1, seatsAvailable()).findFirst().getAsInt();
     }
 }

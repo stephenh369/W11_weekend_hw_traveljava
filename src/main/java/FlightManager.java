@@ -1,11 +1,16 @@
-import java.util.Date;
+import java.util.ArrayList;
 
 public class FlightManager {
 
     private Flight flight;
+    private ArrayList<Integer> takenSeats;
 
     public FlightManager(Flight flight) {
         this.flight = flight;
+        this.takenSeats = new ArrayList<>();
+        for (Passenger i : flight.getPassengers()) {
+            takenSeats.add(i.getSeatNum());
+        }
     }
 
     public Flight getFlight() {
@@ -28,6 +33,18 @@ public class FlightManager {
     public double calculateBagWeightAvailable() {
         double maxBagWeight = flight.getAssignedPlane().getType().getWeight() / 2.00;
         return  maxBagWeight - calculateBagWeightBooked();
+    }
+
+    public void bookPassenger(Passenger passenger) {
+//        if (passenger.getBagWeight() < calculateMaxIndividualBagWeight()) {
+            getFlight().addPassenger(passenger);
+            passenger.setFlight(flight);
+//            for (Integer seat : takenSeats) {
+//                if (flight.randomAvailableSeat() != seat) {
+                    passenger.setSeatNum();
+//                }
+//            }
+//        }
     }
 
 }

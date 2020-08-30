@@ -10,11 +10,17 @@ public class FlightTest {
     Passenger passenger1;
     Passenger passenger2;
     ArrayList<Passenger> passengerGroup;
+
     Plane plane;
     Plane emptyPlane;
+    Plane smallPlane;
+
     Flight flight1;
     Flight emptyFlight;
+    Flight smallFlight;
+
     FlightManager flightManager1;
+    FlightManager smallFlightManager;
 
     @Before
     public void before() {
@@ -26,6 +32,7 @@ public class FlightTest {
 
         plane = new Plane(PlaneType.BOEING747);
         emptyPlane = new Plane(PlaneType.EMPTYPLANE);
+        smallPlane = new Plane(PlaneType.SMALLPLANE);
 
         flight1 = new Flight(
                 plane,
@@ -53,7 +60,20 @@ public class FlightTest {
                 0
         );
 
+        smallFlight = new Flight(
+                smallPlane,
+                "00000",
+                "N/A",
+                "N/A",
+                2020,
+                1,
+                1,
+                0,
+                0
+        );
+
         flightManager1 = new FlightManager(flight1);
+        smallFlightManager = new FlightManager(smallFlight);
 
     }
 
@@ -86,19 +106,19 @@ public class FlightTest {
 
     @Test
     public void canBookPassenger() {
-        flight1.bookPassenger(passenger1);
+        flight1.addPassenger(passenger1);
         assertEquals(1, flight1.getPassengers().size());
     }
 
     @Test
     public void cannotBookPassengerIfNoSeats() {
-        emptyFlight.bookPassenger(passenger1);
+        emptyFlight.addPassenger(passenger1);
         assertEquals(0, flight1.getPassengers().size());
     }
 
     @Test
     public void canGetSeatsAvailable() {
-        flight1.bookPassenger(passenger1);
+        flight1.addPassenger(passenger1);
         assertEquals(399, flight1.seatsAvailable());
     }
 
@@ -111,15 +131,25 @@ public class FlightTest {
 
     @Test
     public void canCalculateBagWeightBooked() {
-        flight1.bookPassenger(passenger1);
-        flight1.bookPassenger(passenger2);
+        flight1.addPassenger(passenger1);
+        flight1.addPassenger(passenger2);
         assertEquals(15.00, flightManager1.calculateBagWeightBooked(), 0.01);
     }
 
     @Test
     public void canCalculateBagWeightAvailable() {
-        flight1.bookPassenger(passenger1);
-        flight1.bookPassenger(passenger2);
+        flight1.addPassenger(passenger1);
+        flight1.addPassenger(passenger2);
         assertEquals(9985.00, flightManager1.calculateBagWeightAvailable(), 0.01);
+    }
+
+    @Test
+    public void canBookPassengerWithRandomAvailableSeat() {
+        smallFlightManager.bookPassenger(passenger1);
+        assertEquals(1, smallFlight.getPassengers().size());
+        assertEquals(9, smallFlight.seatsAvailable());
+        assertEquals(5.00, smallFlightManager.calculateBagWeightBooked(), 0.01);
+        assertEquals(45.00, smallFlightManager.calculateBagWeightAvailable(), 0.01);
+        assertEquals(1, passenger1.getSeatNum());
     }
 }
