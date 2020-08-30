@@ -3,13 +3,13 @@ import java.util.ArrayList;
 public class FlightManager {
 
     private Flight flight;
-    private ArrayList<Integer> takenSeats;
+    private ArrayList<Integer> availableSeats;
 
     public FlightManager(Flight flight) {
         this.flight = flight;
-        this.takenSeats = new ArrayList<>();
-        for (Passenger i : flight.getPassengers()) {
-            takenSeats.add(i.getSeatNum());
+        this.availableSeats = new ArrayList<>();
+        for (int i = 1; i <= flight.seatsAvailable(); i++) {
+            this.availableSeats.add(i);
         }
     }
 
@@ -36,15 +36,13 @@ public class FlightManager {
     }
 
     public void bookPassenger(Passenger passenger) {
-//        if (passenger.getBagWeight() < calculateMaxIndividualBagWeight()) {
-            getFlight().addPassenger(passenger);
-            passenger.setFlight(flight);
-//            for (Integer seat : takenSeats) {
-//                if (flight.randomAvailableSeat() != seat) {
-                    passenger.setSeatNum();
-//                }
-//            }
-//        }
+        getFlight().addPassenger(passenger);
+        passenger.setFlight(flight);
+        for (Integer seat : availableSeats) {
+            if (flight.randomAvailableSeat() != seat) {
+                passenger.setSeatNum();
+            }
+        }
     }
 
 }

@@ -150,6 +150,5 @@ public class FlightTest {
         assertEquals(9, smallFlight.seatsAvailable());
         assertEquals(5.00, smallFlightManager.calculateBagWeightBooked(), 0.01);
         assertEquals(45.00, smallFlightManager.calculateBagWeightAvailable(), 0.01);
-        assertEquals(1, passenger1.getSeatNum());
     }
 }
