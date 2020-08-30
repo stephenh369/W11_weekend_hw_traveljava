@@ -1,4 +1,7 @@
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class Flight {
 
@@ -7,20 +10,27 @@ public class Flight {
     private String flightNum;
     private String destination;
     private String departureLocation;
-    private String departureTime;
+    private ZonedDateTime departureTime;
 
     public Flight(Plane assignedPlane,
                   String flightNum,
                   String destination,
                   String departureLocation,
-                  String departureTime)
+                  int departYear,
+                  int departMonth,
+                  int departDay,
+                  int departHour,
+                  int departMin)
     {
         this.passengers = new ArrayList<Passenger>();
         this.assignedPlane = assignedPlane;
         this.flightNum = flightNum;
         this.destination = destination;
         this.departureLocation = departureLocation;
-        this.departureTime = departureTime;
+        this.departureTime = ZonedDateTime.of(
+                departYear, departMonth, departDay,
+                departHour, departMin, 0, 0,
+                ZoneId.of("Europe/London"));
     }
 
     public ArrayList<Passenger> getPassengers() {
@@ -43,8 +53,14 @@ public class Flight {
         return departureLocation;
     }
 
-    public String getDepartureTime() {
+    public ZonedDateTime getDepartureTime() {
         return departureTime;
+    }
+
+    public String getFormattedDepartureTime() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("HHmm, dd MMM yyyy");
+        String formatted = format.format(this.departureTime);
+        return formatted;
     }
 
     public void bookPassenger(Passenger passenger) {

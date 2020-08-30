@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class FlightManager {
 
     private Flight flight;
@@ -27,4 +29,5 @@ public class FlightManager {
         double maxBagWeight = flight.getAssignedPlane().getType().getWeight() / 2.00;
         return  maxBagWeight - calculateBagWeightBooked();
     }
+
 }

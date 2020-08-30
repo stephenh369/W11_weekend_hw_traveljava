@@ -1,6 +1,5 @@
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 
 import java.util.ArrayList;
 
@@ -33,18 +32,29 @@ public class FlightTest {
                 "AB123",
                 "LAX",
                 "EDI",
-                "0700"
+                2020,
+                10,
+                2,
+                07,
+                00
         );
+
+
 
         emptyFlight = new Flight(
                 emptyPlane,
                 "00000",
                 "N/A",
                 "N/A",
-                "N/A"
+                2020,
+                1,
+                1,
+                0,
+                0
         );
 
         flightManager1 = new FlightManager(flight1);
+
     }
 
 //    FLIGHT CLASS
@@ -71,7 +81,7 @@ public class FlightTest {
 
     @Test
     public void canGetDepartureTime() {
-        assertEquals("0700", flight1.getDepartureTime());
+        assertEquals("0700, 02 Oct 2020", flight1.getFormattedDepartureTime());
     }
 
     @Test
